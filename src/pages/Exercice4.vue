@@ -17,12 +17,12 @@
           <v-alert type="error" class="mb-2">
             Vous avez atteint la limite maximale de caractères !
           </v-alert>
-
           <v-text-field
             outlined
             rows="2"
             label="Tapez votre texte ici"
             :counter="MAX_LENGTH"
+            v-model="userInput"
           />
         </v-card-text>
 
@@ -46,5 +46,6 @@ import { ref } from 'vue';
 const MAX_LENGTH = 20;
 // Variable réactive pour le texte saisi
 const userInput = ref('');
+
 
 </script>
