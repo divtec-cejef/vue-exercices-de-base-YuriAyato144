@@ -1,31 +1,24 @@
 <template>
   <v-container max-width="700">
     <!-- Donnée de l'exercice -->
-    <exercice-objectifs number="3" />
+    <exercice-objectifs number="3"/>
     <!-- Zone de travail pour l'exercice -->
     <div class="exe-zone">
       <h2>Zone d'exercice</h2>
-      <v-card
-        class="mx-auto my-6 pa-2"
-        max-width="300"
-      >
+      <v-card class="mx-auto my-6 pa-2" max-width="300">
         <v-card-title>Liste de Pokémons</v-card-title>
-
-        <v-card-subtitle class="text-center">
+        <!-- Affiche message si la liste est vide -->
+        <v-card-subtitle class="text-center" v-if="pokemons.length === 0">
           La liste est vide.
         </v-card-subtitle>
-
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>
-              *** POKEMON ***
-            </v-list-item-title>
-
+        <!-- Liste dynamique de Pokémons -->
+        <v-list v-else>
+          <v-list-item v-for="(pokemon, index) in pokemons" :key="pokemon">
+            <v-list-item-title>{{ pokemon }}</v-list-item-title>
             <template v-slot:append>
-              <v-btn
-                icon="mdi-delete"
-                variant="text"
-              ></v-btn>
+              <v-btn icon variant="text" @click="removePokemon(index)">
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
             </template>
           </v-list-item>
         </v-list>
@@ -33,13 +26,11 @@
     </div>
   </v-container>
 </template>
-
 <script setup>
 // Importation du composant contenant la donnée de l'exercice
 import ExerciceObjectifs from "@/components/ExerciceObjectifs.vue";
 // Importation de la fonction réactive ref
 import {ref} from 'vue';
-
 // Tableau réactif de noms de Pokémons
 const pokemons = ref([
   "Pikachu",
@@ -57,4 +48,3 @@ function removePokemon(index) {
   pokemons.value.splice(index, 1);
 }
 </script>
-
